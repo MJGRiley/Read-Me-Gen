@@ -1,0 +1,23 @@
+{
+  "name": "Read-Me-Gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MJGRiley/Read-Me-Gen.git"
+  },
+  "keywords": [],
+  "author": "Morgan Riley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MJGRiley/Read-Me-Gen/issues"
+  },
+  "homepage": "https://github.com/MJGRiley/Read-Me-Gen#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
+}
