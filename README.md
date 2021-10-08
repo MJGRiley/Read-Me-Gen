@@ -26,7 +26,7 @@ Answer all the prompts and you'll have your high-quality, professional README re
 * add Badges
 
 ## Links
-* [Github pages](https://MJGRiley.github.io/Read-Me_Gen)
+* [Google Drive Video](https://drive.google.com/file/d/1f4ZXeXYXLpj8TWCqdYxIHLzg8MTWbgH-/view?usp=sharing)
 
 * [Github repo](https://github.com/MJGRiley/Read-Me_Gen)
 
