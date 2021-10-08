@@ -1,16 +1,14 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer')
 inquirer.registerPrompt('suggest', require('inquirer-prompt-suggest'))
 const fs = require('fs')
 const {generateMarkdown,generateMarkdownTwo,licenseIcons,BSD,MIT,GPL,apache} = require('./utils/generateMarkdown')
+
 let licenses = []
 let repo = ''
 let uName = ''
 let userId = ''
 let data = ''
 
-
-// TODO: Create an array of questions for user input
 function askAway() {
     const pQs = [
         { //This is the first array of questions the user will be asked
@@ -118,7 +116,6 @@ const appendLicenses = (data) => {
     printThatBOut(data)
 }
 
-// TODO: Create a function to write README file
 const printThatBOut = (data) => {//this outputs the data to a file, README.md is already taken
     fs.writeFile('highQualityProfessionalREADME.md', data, err => {
         if (err) {
@@ -127,8 +124,3 @@ const printThatBOut = (data) => {//this outputs the data to a file, README.md is
         }
     })
 }
-// TODO: Create a function to initialize app
-function init() {}//I didn't know what to put here
-
-// Function call to initialize app
-init();
