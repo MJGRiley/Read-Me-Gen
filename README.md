@@ -13,13 +13,16 @@ This program prompts the user for information and then builds a high-quality, pr
 - [License](#license)
 
 ## Features
-* Dynamic Sections below a dynamically generated Table of Contents
+* Uses Inquirer to prompt the user for information
+* Dynamic Sections based on that information
+* Table of Contents for those dynamic sections
 
 ## Useage Information
-Answer all the prompts and you'll have your README ready to go
+Answer all the prompts and you'll have your high-quality, professional README ready to go
 
 ## Future Development
 * add list dynamically to any given section
+* add Badges
 
 ## Links
 * [Github pages](https://MJGRiley.github.io/Read-Me_Gen)
