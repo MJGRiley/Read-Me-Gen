@@ -1,42 +1,80 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const fs = require('fs')
-
+const fs = require('fs');
+const generate = require('./utils/generateMarkdown')
+let data = ''
 
 // TODO: Create an array of questions for user input
-const questions = [];
-inquirer
-    .prompt([
+function askAway() {
+    const pQs = [
         {
-            type: 'input',
-            message: 'What was your motivation?',
-            name: 'motiv',
+        type: 'input',
+        message: 'What is your title of your Project?',
+        name: 'projName',
+        },{
+        type: 'input',
+        message: 'Please write a short description of your project?',
+        name: 'description',
+        },{
+        type: 'confirm',
+        message: 'Do you want a table of contents?',
+        name: 'table',
         },
+    ]
+    inquirer
+        .prompt(pQs)
+        .then((answers) => {
+            // console.log(answers)
+            data = generate(answers)
+            // console.log(data)
+            if (answers.table){tOC()}
+        })
+}
+askAway()
+
+function tOC() {
+    let secNames = []
+    const sectionQs = []
+    const contentQs = []
+    const tOCQs = [
         {
-            type: 'input',
-            message: 'What is your title of your Project?',
-            name: 'projectName',
+            type: 'number',
+            message: 'How many sections do you need?',
+            name: 'howMany',
         },
-        {
-            type: 'list',
-            message: 'Why did you build this project?',
-            choices: ['who','what','where','when'],
-            name: 'NextQ',
-        },
-        {
-            type: 'input',
-            message: 'What problem does it solve?',
-            name: 'prob',
-        },
-        {
-            type: 'input',
-            message: 'What did you learn?',
-            name: 'learn',
-        },
-    ])
-    .then((answers) => {
-        console.log(answers)
-    })
+    ]
+
+    inquirer
+        .prompt(tOCQs)
+        .then((answers) => {
+            for(i=0;i<answers.howMany;i++) {
+                let temp = {type:'input',message:'Title for section '+(i+1),name:'section' + (i+1)}
+                secNames.push(temp.name)
+                contentQs.push(temp)
+            }
+            return(answers)
+        })
+        .then(() => {
+            inquirer
+                .prompt(contentQs)
+                .then((answers) =>{ 
+                    console.log(answers)
+                    for (const [answer] in answers) {
+                        //answers.`${key}` 
+                        console.log(answer.reduce)
+                        let temp = {type:'input',message:`What content do you want for ${answer}`,name:`${answer}` }
+                        console.log(temp)
+                        sectionQs.push(temp)
+                    }
+                })
+            inquirer
+                .prompt(sectionQs)
+                .then((answers) => {
+                    data.concat(generateMarkdownTwo(answers))
+              })
+        
+        })
+}
 
 // TODO: Create a function to write README file
 // fs.writeToFile(highQualityProfessionalREADME.md, data, err => {
@@ -71,4 +109,4 @@ init();
 // Why did you build this project? 
 // What problem does it solve?
 // What did you learn?
-// What makes your project stand out?)
+// What makes your project stand out?
