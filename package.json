@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MJGRiley/Read-Me-Gen#readme",
   "dependencies": {
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.0",
+    "inquirer-prompt-suggest": "^0.1.0"
   }
 }

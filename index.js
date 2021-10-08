@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {generateMarkdown,generateMarkdownTwo} = require('./utils/generateMarkdown')
+const {generateMarkdown,generateMarkdownTwo,licenseIcons} = require('./utils/generateMarkdown')
 let data = ''
 
 // TODO: Create an array of questions for user input
@@ -19,14 +19,18 @@ function askAway() {
         type: 'confirm',
         message: 'Do you want a table of contents?',
         name: 'table',
-        },
+        },{
+        type: 'checkbox',
+        message: 'Which licenses do you want to include?',
+        name: 'licenses',
+        choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause'],
+        }
+        
     ]
     inquirer
         .prompt(pQs)
         .then((answers) => {
-             console.log(answers)
-            data = generateMarkdown(answers)
-             console.log(data)
+            data = generateMarkdown(answers) + licenseIcons(answers.licenses)
             if (answers.table){tOC()}
         })
 }
@@ -47,19 +51,15 @@ function tOC() {
         .prompt(tOCQs)
         .then((answers) => {
             for(i=0;i<answers.howMany;i++) {
-                let temp = {type:'input',message:'Title for section '+(i+1),name:'section' + (i+1)}
+                let temp = {type:'suggest',message:'Title for section '+(i+1),name:'section' + (i+1),suggestions:['Description', 'Installation', 'Usage', 'Contributing','Tests']}
                 contentQs.push(temp)
             }
-        })
-        .then(() => {
             inquirer
                 .prompt(contentQs)
                 .then((answers) =>{ 
                     secNames = (Object.values(answers))
                     for (const answer of secNames) {
-                        console.log(answer)
                         let temp = {type:'input',message:`What content do you want for ${answer}`,name:`${answer}` }
-                        console.log(temp)
                         sectionQs.push(temp)
                     }
                 })
@@ -67,24 +67,33 @@ function tOC() {
                     inquirer
                         .prompt(sectionQs)
                         .then((answers) => {
-                            for (const answer of secNames) {
-                            data.concat(generateMarkdownTwo(answer,answers))
+                            data = data.concat(`## Table of Contents\n`)
+                            let temp = (Object.values(answers))
+                            secNames.forEach(elem => data = data.concat(`- [${elem}](#${elem.toLowerCase().trim()})\n`))
+                            for (const [i,answer] of secNames.entries()) {
+                                let tempTwo = generateMarkdownTwo(answer,temp[i])
+                                data = data.concat(tempTwo)
                             }
+                            appendLicenses(data)
+                            printThatBOut(data)
                         })
-                })
-        
+                    })
         })
+}
+const appendLicenses = (data) => {
+    inquirer
 }
 
 // TODO: Create a function to write README file
-// fs.writeToFile(highQualityProfessionalREADME.md, data, err => {
-//     if (err) {
-//       console.error(err)
-//       return
-//     }
-//     //file written successfully
-//   })
-
+const printThatBOut = (data) => {
+    fs.writeFile('highQualityProfessionalREADME.md', data, err => {
+        if (err) {
+            console.error(err)
+            return
+        }
+    //file written successfully
+    })
+}
 // TODO: Create a function to initialize app
 function init() {}
 
