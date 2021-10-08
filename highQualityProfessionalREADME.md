@@ -7,10 +7,10 @@ This program prompts the user for information and then builds a high-quality, pr
 
 ## Table of Contents
 - [Features](#features)
-- [Useage Information](#useageinformation)
+- [Useage Information](#useage information)
+- [Future Developement](#future developement)
 - [Licenses](#licenses)
 - [Links](#links)
-- [License](#license)
 
 ## Features
 * Dynamic Sections below a dynamically generated Table of Contents
@@ -18,16 +18,16 @@ This program prompts the user for information and then builds a high-quality, pr
 ## Useage Information
 Answer all the prompts and you'll have your README ready to go
 
-## Future Development
-* add list dynamically to any given section
+## Future Developement
+add list option to dynamic sections
 
 ## Links
-* [Github pages](https://MJGRiley.github.io/Read-Me_Gen)
-
-* [Github repo](https://github.com/MJGRiley/Read-Me_Gen)
+[Github pages](https://MJGRiley.github.io/Read-Me-Gen)
+[Github repo](https://github.com/MJGRiley/Read-Me-Gen)
 
 ## License
-  Copyright <2021> Morgan Riley
+
+  Copyright <2021> <Morgan Riley>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
   

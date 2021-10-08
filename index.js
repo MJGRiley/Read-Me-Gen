@@ -1,15 +1,33 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {generateMarkdown,generateMarkdownTwo,licenseIcons} = require('./utils/generateMarkdown')
+const {generateMarkdown,generateMarkdownTwo,licenseIcons,BSD,MIT,GPL,apache} = require('./utils/generateMarkdown')
+let licenses = []
+let repo = ''
+let uName = ''
+let userId = ''
 let data = ''
+
 
 // TODO: Create an array of questions for user input
 function askAway() {
     const pQs = [
         {
         type: 'input',
-        message: 'What is your title of your Project?',
+        message: 'What\'s your Name?',
+        name: 'uName',
+        },{
+        type: 'input',
+        message: 'What\'s your GitHub username?',
+        name: 'gHUID',
+        },{
+        type: 'suggest',
+        message: 'What\'s your Project\'s Repo\'s name?',
+        suggestions: ['Not the full URL'],
+        name: 'repo',
+        },{
+        type: 'input',
+        message: 'What\'s the title of your Project?',
         name: 'title',
         },{
         type: 'input',
@@ -20,7 +38,7 @@ function askAway() {
         message: 'Do you want a table of contents?',
         name: 'table',
         },{
-        type: 'checkbox',
+        type: 'list',
         message: 'Which licenses do you want to include?',
         name: 'licenses',
         choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause'],
@@ -30,7 +48,11 @@ function askAway() {
     inquirer
         .prompt(pQs)
         .then((answers) => {
-            data = generateMarkdown(answers) + licenseIcons(answers.licenses)
+            licenses = answers.licenses
+            repo = answers.repo
+            userId = answers.gHUID
+            uName = answers.uName
+            data = generateMarkdown(answers) + licenseIcons(licenses)
             if (answers.table){tOC()}
         })
 }
@@ -67,21 +89,32 @@ function tOC() {
                     inquirer
                         .prompt(sectionQs)
                         .then((answers) => {
-                            data = data.concat(`## Table of Contents\n`)
+                            data = data.concat(`\n## Table of Contents\n`)
                             let temp = (Object.values(answers))
-                            secNames.forEach(elem => data = data.concat(`- [${elem}](#${elem.toLowerCase().trim()})\n`))
+                            secNames.forEach(elem => data = data.concat(`- [${elem}](#${elem.toLowerCase().trim().split().join()})\n`))
+                            if (licenses) {data = data.concat(`- [Licenses](#licenses)\n`)}
+                            data = data.concat(`- [Links](#links)\n`)
                             for (const [i,answer] of secNames.entries()) {
                                 let tempTwo = generateMarkdownTwo(answer,temp[i])
                                 data = data.concat(tempTwo)
                             }
                             appendLicenses(data)
-                            printThatBOut(data)
                         })
-                    })
+                })
         })
 }
 const appendLicenses = (data) => {
-    inquirer
+    data = data.concat("\n## Links\n")
+    data = data.concat(`[Github pages](https://${userId}.github.io/${repo})\n`)
+    data = data.concat(`[Github repo](https://github.com/${userId}/${repo})\n`)
+    if (licenses) {
+        data = data.concat("\n## License\n")
+        if (licenses.includes('MIT')) {data = data.concat(MIT(uName))}
+        if (licenses.includes('Apache 2.0')) {data = data.concat(apache(uName))}
+        if (licenses.includes('GPLv3')) {data = data.concat(GPL(uName))}
+        if (licenses.includes('BSD 3-Clause')) {data = data.concat(BSD(uName))}
+    }
+    printThatBOut(data)
 }
 
 // TODO: Create a function to write README file
