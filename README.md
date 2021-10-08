@@ -21,6 +21,7 @@ This program prompts the user for information and then builds a high-quality, pr
 Answer all the prompts and you'll have your high-quality, professional README ready to go
 
 ## Future Development
+* make suggestions to the user
 * add list dynamically to any given section
 * add Badges
 

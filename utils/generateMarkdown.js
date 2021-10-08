@@ -1,5 +1,3 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-
 const { BADSTR } = require("dns")
 
 // If there is no license, return an empty string
@@ -12,16 +10,7 @@ function licenseIcons(licenses) {
   return temp
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
-
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(data) {//takes the data and outputs it in a string format
   return `# ${data.title}
 
 ## Description
@@ -30,13 +19,13 @@ ${data.description}
 `;
 }
 
-function generateMarkdownTwo(title,data) {
+function generateMarkdownTwo(title,content) {
   return `
 ## ${title}
-${data}
+${content}
 `;
 }
-
+// Licenses copied from their respective documentation
 function BSD(uName) { 
   return `
   Copyright <2021> <${uName}>
