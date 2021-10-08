@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generate = require('./utils/generateMarkdown')
+const {generateMarkdown,generateMarkdownTwo} = require('./utils/generateMarkdown')
 let data = ''
 
 // TODO: Create an array of questions for user input
@@ -10,7 +10,7 @@ function askAway() {
         {
         type: 'input',
         message: 'What is your title of your Project?',
-        name: 'projName',
+        name: 'title',
         },{
         type: 'input',
         message: 'Please write a short description of your project?',
@@ -24,9 +24,9 @@ function askAway() {
     inquirer
         .prompt(pQs)
         .then((answers) => {
-            // console.log(answers)
-            data = generate(answers)
-            // console.log(data)
+             console.log(answers)
+            data = generateMarkdown(answers)
+             console.log(data)
             if (answers.table){tOC()}
         })
 }
@@ -43,35 +43,35 @@ function tOC() {
             name: 'howMany',
         },
     ]
-
     inquirer
         .prompt(tOCQs)
         .then((answers) => {
             for(i=0;i<answers.howMany;i++) {
                 let temp = {type:'input',message:'Title for section '+(i+1),name:'section' + (i+1)}
-                secNames.push(temp.name)
                 contentQs.push(temp)
             }
-            return(answers)
         })
         .then(() => {
             inquirer
                 .prompt(contentQs)
                 .then((answers) =>{ 
-                    console.log(answers)
-                    for (const [answer] in answers) {
-                        //answers.`${key}` 
-                        console.log(answer.reduce)
+                    secNames = (Object.values(answers))
+                    for (const answer of secNames) {
+                        console.log(answer)
                         let temp = {type:'input',message:`What content do you want for ${answer}`,name:`${answer}` }
                         console.log(temp)
                         sectionQs.push(temp)
                     }
                 })
-            inquirer
-                .prompt(sectionQs)
-                .then((answers) => {
-                    data.concat(generateMarkdownTwo(answers))
-              })
+                .then(() => {
+                    inquirer
+                        .prompt(sectionQs)
+                        .then((answers) => {
+                            for (const answer of secNames) {
+                            data.concat(generateMarkdownTwo(answer,answers))
+                            }
+                        })
+                })
         
         })
 }

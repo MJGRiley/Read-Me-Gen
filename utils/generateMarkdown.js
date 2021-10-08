@@ -20,10 +20,10 @@ ${data.description}
 `;
 }
 
-function generateMarkdownTwo(data) {
-  return `${data.title}
-${data.description}
+function generateMarkdownTwo(Title,data) {
+  return `
+## ${title}
 
 `;
 }
-module.exports = generateMarkdown;
+module.exports = {generateMarkdown,generateMarkdownTwo}
