@@ -92,9 +92,9 @@ function tOC() {
                         .then((answers) => {
                             data = data.concat(`\n## Table of Contents\n`) //adds table of contents to the data string
                             let temp = (Object.values(answers)) //takes all the answers just given and puts them in an array
-                            secNames.forEach(elem => data = data.concat(`- [${elem}](#${elem.toLowerCase().trim().split().join()})\n`))
-                            if (licenses) {data = data.concat(`- [Licenses](#licenses)\n`)}
+                            secNames.forEach(elem => data = data.concat(`- [${elem}](#${elem.toLowerCase().split(' ').join('')})\n`))
                             data = data.concat(`- [Links](#links)\n`)
+                            if (licenses) {data = data.concat(`- [License](#license)\n`)}
                             for (const [i,answer] of secNames.entries()) {//iterates through the sections titles and gives an index
                                 let tempTwo = generateMarkdownTwo(answer,temp[i])//uses that index to select corresponding content
                                 data = data.concat(tempTwo)//adds it to the data string
@@ -105,9 +105,9 @@ function tOC() {
         })
 }
 const appendLicenses = (data) => {
-    data = data.concat("\n## Links\n")
-    data = data.concat(`[Github pages](https://${userId}.github.io/${repo})\n`)
-    data = data.concat(`[Github repo](https://github.com/${userId}/${repo})\n`)
+    data = data.concat("\n## Links\n")//adds the user's GitHub pages and repo
+    data = data.concat(`[GitHub pages](https://${userId}.github.io/${repo})\n`)
+    data = data.concat(`[GitHub repo](https://github.com/${userId}/${repo})\n`)
     if (licenses) {//If you requested a license it adds one to the bottom of the README
         data = data.concat("\n## License\n")
         if (licenses.includes('MIT')) {data = data.concat(MIT(uName))} //Licenses added to javascript file to save on space

@@ -17,7 +17,7 @@ This program prompts the user for information and then builds a high-quality, pr
 * Dynamic Sections based on that information
 * Table of Contents for those dynamic sections
 
-## Useage Information
+## Usage Information
 Answer all the prompts and you'll have your high-quality, professional README ready to go
 
 ## Future Development
@@ -26,9 +26,9 @@ Answer all the prompts and you'll have your high-quality, professional README re
 * add Badges
 
 ## Links
-* [Github pages](https://MJGRiley.github.io/Read-Me_Gen)
+* [Google Drive Video](https://watch.screencastify.com/v/8k2o9HkgqI8gpujk7ZGs)
 
-* [Github repo](https://github.com/MJGRiley/Read-Me_Gen)
+* [GitHub repo](https://github.com/MJGRiley/Read-Me_Gen)
 
 ## License
   Copyright <2021> Morgan Riley
