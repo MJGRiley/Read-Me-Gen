@@ -1,5 +1,3 @@
-const { BADSTR } = require("dns")
-
 // If there is no license, return an empty string
 function licenseIcons(licenses) {
   let temp = ''
